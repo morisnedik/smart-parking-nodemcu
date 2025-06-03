@@ -253,24 +253,20 @@
     }
   });
 
-  confirmBtn.addEventListener('click', () => {
-    popupTitle.textContent = 'Pembayaran Berhasil';
-    popupText.textContent = 'Gerbang dibuka, Silahkan menuju ke tempat parkir anda!';
-    confirmBtn.classList.add('hidden');
-    cancelBtn.textContent = 'Tutup';
+confirmBtn.addEventListener('click', () => {
+  popupTitle.textContent = 'Pembayaran Berhasil';
+  popupText.textContent = 'Gerbang dibuka, Silahkan menuju ke tempat parkir anda!';
+  confirmBtn.classList.add('hidden');
+  cancelBtn.textContent = 'Tutup';
 
-    // Mark the selected slots as occupied
-    selectedSlots.forEach(slotId => {
-      if (slotId === 'slot1') {
-        setSlotOccupied(slot1);
-      } else if (slotId === 'slot2') {
-        setSlotOccupied(slot2);
-      }
-    });
-
-    selectedSlots.clear();
-    updatePayButton();
+  // Tandai slot tetap kuning (menunggu kendaraan datang)
+  selectedSlots.forEach(slotId => {
+    const slotElement = document.getElementById(slotId);
+    setSlotSelected(slotElement);
   });
+
+  updatePayButton();
+});
 
   cancelBtn.addEventListener('click', () => {
     if (confirmBtn.classList.contains('hidden')) {
